@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import withClasses from '../hoc/WithClasses';
+import Aux from '../hoc/Aux';
 
 
 class App extends Component {
@@ -14,7 +16,8 @@ class App extends Component {
       {id:"khxcga", name: "Eve", age:28}
     ],
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    authenticated: false
   }
 
   constructor(props) {
@@ -40,6 +43,11 @@ class App extends Component {
     console.log('[App.js] componentDidUpdate');
   }
 
+  loginHandler = () => {
+    
+    let isLogged = this.state.authenticated;
+    this.setState({authenticated: !isLogged});
+  } 
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(person => {return person.id === id});
@@ -69,33 +77,34 @@ class App extends Component {
     console.log('[App.js] render');
 
     let persons = null;
-
     if (this.state.showPersons) {
       persons = (
         <Persons
           persons = {this.state.persons}
           clicked = {this.deletePersonHandler}
           changed = {this.nameChangedHandler}
+          isAuthenticated = {this.state.authenticated}
         />
       )
     }
     
     return (
-      <div className={classes.App}>
+      <Aux>
         <button onClick={() => {this.setState({showCockpit: false})}}>Hide Cockpit</button>
         {this.state.showCockpit ?
         <Cockpit
           title = {this.props.appTitle}
           personsLength = {this.state.persons.length}
           clicked = {this.togglePersonsHander}
+          login = {this.loginHandler}
           alt = {this.state.showPersons}  
         />
       : null}
         {persons} 
-      </div>
+      </Aux>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React application.'));
   }
 }
 
-export default App;
+export default withClasses(App, classes.App);

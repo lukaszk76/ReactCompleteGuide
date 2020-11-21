@@ -3,22 +3,22 @@
   }
   
 .red {
-    color: red;
+    color: rgb(117, 31, 31);
   }
   
 .Button{
     background-color: rgb(124, 158, 29);
-    color: rgb(0, 0, 0);
+    color: rgb(142, 199, 147);
     font: inherit;
     border: 1px solid rgb(16, 124, 124);
-    border-radius: 5px;
+    border-radius: 100px;
     padding: 8px;
     cursor: pointer;
 }
 
 .Button:hover {
     background-color: rgb(169, 199, 130);
-    border: 1px solid rgb(164, 216, 216);
+    border: 1px solid rgb(17, 211, 211);
 }
 
 .Button.Red {
@@ -28,6 +28,6 @@
 }
 
 .Button.Red:hover {
-    background-color: rgb(245, 189, 106);
-    border: 1px solid rgb(79, 252, 252);
+    background-color: rgb(229, 197, 149);
+    border: 1px solid rgb(52, 153, 153);
 }
